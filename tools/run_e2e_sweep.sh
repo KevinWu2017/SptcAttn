@@ -34,8 +34,6 @@ case "${profile}" in
 esac
 
 mkdir -p "${output_dir}"
-export PYTHONPATH="${repo_root}/components/sglang/sgl-kernel/python:${repo_root}/baselines/minference${PYTHONPATH:+:${PYTHONPATH}}"
-
 cd "${repo_root}/baselines/minference"
 exec "${python_bin}" experiments/benchmarks/profile_e2e_sweep.py \
   "${profile_args[@]}" \

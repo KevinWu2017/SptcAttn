@@ -30,8 +30,6 @@ case "${profile}" in
 esac
 
 mkdir -p "${output_dir}"
-export PYTHONPATH="${repo_root}/components/sglang/sgl-kernel/python:${repo_root}/baselines/minference${PYTHONPATH:+:${PYTHONPATH}}"
-
 exec "${python_bin}" "${repo_root}/experiments/legacy/cmake_sparse_compare/benchmark_sparse_sliding_window.py" \
   "${profile_args[@]}" \
   --minference-root "${repo_root}/baselines/minference/minference" \
