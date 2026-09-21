@@ -40,12 +40,24 @@ accelerate  1.15.0
 transformers 4.52.3
 ```
 
-`pip check` 通过，且 `sglang` 与 `flash_attn` 已可导入。`sgl-kernel` 尚未安装；在运行本仓库的 metadata converter、SWA 或 local sparse kernel 路径前，必须从本仓库编译该定制扩展：
+`pip check` 通过，且 `sglang` 与 `flash_attn` 已可导入。`sgl-kernel` 尚未安装；在运行本仓库的 metadata converter、SWA 或 local sparse kernel 路径前，必须从本仓库编译该定制扩展。该 Make target 对应原来的 `sglang/sgl-kernel/cmd-build.sh`，但使用 `pip wheel`，无需 `uv`：
 
 ```bash
 make install-sgl-kernel PYTHON="$PWD/.venv/bin/python"
 .venv/bin/python -m pip show sgl-kernel
 ```
+
+默认目标是 SM80（A100）。可显式选择 CUDA toolkit、一个或多个 GPU 架构、并行度与 ccache 目录：
+
+```bash
+make install-sgl-kernel PYTHON="$PWD/.venv/bin/python" \
+  SGL_KERNEL_CUDA_HOME=/usr/local/cuda-12.8 \
+  SGL_KERNEL_CUDA_ARCHS=80,89 \
+  SGL_KERNEL_BUILD_JOBS=16 \
+  SGL_KERNEL_CCACHE_DIR="$HOME/.cache/sgl-kernel/ccache"
+```
+
+生成的 wheel 与 CMake build tree 位于 `.build/sgl-kernel/`。该构建直接引用 `components/sgl-flash-attn` 的 FA2/SWA 源码；`make install-flash-attn` 的完整 editable FlashAttention 安装不是 SWA no-split/tuned 流程的必需步骤。
 
 ### vLLM / Transformers 兼容性
 

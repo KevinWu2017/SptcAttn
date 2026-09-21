@@ -2,6 +2,11 @@ CMAKE_ARGS ?=
 PYTHON ?= python3
 PYTHON_BOOTSTRAP ?= python3
 VENV_DIR ?= .venv
+SGL_KERNEL_CUDA_HOME ?= $(CUDA_HOME)
+SGL_KERNEL_CUDA_ARCHS ?= 80
+SGL_KERNEL_BUILD_JOBS ?= 16
+SGL_KERNEL_COMPILE_THREADS ?= $(SGL_KERNEL_BUILD_JOBS)
+SGL_KERNEL_CCACHE_DIR ?= $(HOME)/.cache/sgl-kernel/ccache
 KERNEL_CSV ?= reports/figures/data/sparse_latency_matrix_a100.csv
 SWA_CSV ?= results/swa/paper/latency.csv
 E2E_CSV ?= baselines/minference/experiments/profile_e2e_results/gradientai_Llama-3-8B-Instruct-Gradient-1048k_20260520_105150.csv
@@ -15,7 +20,8 @@ help:
 	  '  make install-paper-deps  Install the pinned CPython 3.12 paper environment into .venv' \
 	  '  make env-check  Show Python, PyTorch, CUDA and GPU compatibility' \
 	  '  make install-flash-attn  Build/install local FlashAttention for FA2 SWA baselines' \
-	  '  make install-sgl-kernel  Build/install the local sgl_kernel extension' \
+	  '  make install-sgl-kernel  Build/install the local sgl_kernel wheel (SWA no-split)' \
+	  '    Optional: SGL_KERNEL_CUDA_HOME=/usr/local/cuda-12.8 SGL_KERNEL_CUDA_ARCHS=80,89' \
 	  '  make install-minference  Build/install the local MInference extension' \
 	  '  make configure  Configure the isolated CMake build in .build/cmake' \
 	  '                  Pass CMAKE_ARGS="-DPython_EXECUTABLE=/path/to/python" when needed' \
@@ -44,7 +50,7 @@ install-flash-attn:
 	@$(PYTHON) -m pip install --no-build-isolation -e components/sgl-flash-attn
 
 install-sgl-kernel:
-	@$(PYTHON) -m pip install --no-build-isolation -e components/sglang/sgl-kernel
+	@PYTHON="$(PYTHON)" SGL_KERNEL_CUDA_HOME="$(SGL_KERNEL_CUDA_HOME)" SGL_KERNEL_CUDA_ARCHS="$(SGL_KERNEL_CUDA_ARCHS)" SGL_KERNEL_BUILD_JOBS="$(SGL_KERNEL_BUILD_JOBS)" SGL_KERNEL_COMPILE_THREADS="$(SGL_KERNEL_COMPILE_THREADS)" SGL_KERNEL_CCACHE_DIR="$(SGL_KERNEL_CCACHE_DIR)" SGL_KERNEL_EXTRA_CMAKE_ARGS="$(CMAKE_ARGS)" tools/build_sgl_kernel.sh
 
 install-minference:
 	@MINFERENCE_FORCE_BUILD=TRUE $(PYTHON) -m pip install --no-build-isolation -e baselines/minference

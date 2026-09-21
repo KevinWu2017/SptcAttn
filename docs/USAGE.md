@@ -42,8 +42,11 @@ make env-check PYTHON="$(which python)"
 `sgl_kernel` 提供 metadata converter 和 Python 算子；MInference 提供 Triton/CUTLASS 对照路径。两者都必须由当前环境本地编译，避免误用旧工作区或预编译 wheel。
 
 ```bash
-make install-flash-attn PYTHON="$(which python)"  # FA2/SWA baseline needed only for SWA
-make install-sgl-kernel PYTHON="$(which python)"
+# This builds sgl_kernel and compiles the SWA no-split sources from
+# components/sgl-flash-attn. It does not require a full flash-attn rebuild.
+make install-sgl-kernel PYTHON="$(which python)" \
+  SGL_KERNEL_CUDA_HOME=/usr/local/cuda-12.8 \
+  SGL_KERNEL_CUDA_ARCHS=80
 make install-minference PYTHON="$(which python)"
 
 # A100: 80；RTX 4090: 89；H100: 90。
