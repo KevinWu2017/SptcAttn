@@ -15,7 +15,7 @@ vertical/slash indexes
 
 The public correctness comparison is **v1 -> v5**. v1 remains only as the reference implementation; v5 is the implementation being developed. V4 must not be added to new APIs, test names, result columns, or build targets.
 
-`components/flash-attn` and `components/sglang` are first-party fork submodules. `third_party/cutlass` is an upstream dependency submodule. `baselines/minference` is a comparison-baseline submodule, not part of the production call chain.
+`components/sgl-flash-attn` and `components/sglang` are first-party fork submodules. `third_party/cutlass` is an upstream dependency submodule. `baselines/minference` is a comparison-baseline submodule, not part of the production call chain.
 
 ## Build boundary
 

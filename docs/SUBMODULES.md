@@ -12,7 +12,7 @@ make submodules
 
 ```bash
 git submodule status --recursive
-git -C components/flash-attn status --short
+git -C components/sgl-flash-attn status --short
 git -C components/sglang status --short
 git -C experiments/legacy status --short
 git -C baselines/minference status --short
@@ -23,11 +23,11 @@ git -C baselines/minference status --short
 确认要保留的改动后，应在对应 submodule 中创建独立提交并推送到其 fork；之后回到顶层提交更新后的 gitlink：
 
 ```bash
-git -C components/flash-attn add <files>
-git -C components/flash-attn commit -m "..."
+git -C components/sgl-flash-attn add <files>
+git -C components/sgl-flash-attn commit -m "..."
 
-git add components/flash-attn
-git commit -m "chore: advance flash-attn submodule"
+git add components/sgl-flash-attn
+git commit -m "chore: advance sgl-flash-attn submodule"
 ```
 
 不要把 build、wheel、profile 和 benchmark 输出提交到 submodule；它们属于顶层 `results/` 或本地 `.build/`。

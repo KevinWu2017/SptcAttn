@@ -24,7 +24,7 @@ make build
 
 | 路径 | 职责 |
 | --- | --- |
-| `components/flash-attn` | Git submodule：稀疏 FlashAttention CUDA API、调度和 v1/v5 kernel |
+| `components/sgl-flash-attn` | Git submodule：稀疏 FlashAttention CUDA API、调度和 v1/v5 kernel |
 | `components/sglang` | Git submodule：`sgl_kernel` Python/C++ binding 与 SGLang 集成 |
 | `third_party/cutlass` | Git submodule：CUTLASS/CuTe 依赖 |
 | `experiments/legacy` | Git submodule：`Kernels` demo、CMake 比较器和基准脚本 |

@@ -4,7 +4,7 @@ This orchestration repository refers to source repositories from `/home/cpwu/wor
 
 | Old path | New path | Treatment |
 | --- | --- | --- |
-| `sgl-flash-attn` | `components/flash-attn` | Git submodule; first-party kernel fork |
+| `sgl-flash-attn` | `components/sgl-flash-attn` | Git submodule; first-party kernel fork |
 | `sglang` | `components/sglang` | Git submodule; first-party integration fork |
 | `cutlass` | `third_party/cutlass` | Git submodule; upstream dependency |
 | `Kernels` | `experiments/legacy` | Git submodule; legacy demos and benchmark source |

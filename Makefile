@@ -41,7 +41,7 @@ env-check:
 	@$(PYTHON) tools/check_env.py
 
 install-flash-attn:
-	@$(PYTHON) -m pip install --no-build-isolation -e components/flash-attn
+	@$(PYTHON) -m pip install --no-build-isolation -e components/sgl-flash-attn
 
 install-sgl-kernel:
 	@$(PYTHON) -m pip install --no-build-isolation -e components/sglang/sgl-kernel

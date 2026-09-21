@@ -4,7 +4,7 @@
 
 ## 1. 准备源码
 
-克隆或进入 `SparseAttnUnified` 后先初始化 source submodule。`components/flash-attn`、`components/sglang`、`third_party/cutlass`、`experiments/legacy` 和 `baselines/minference` 各自保留独立 Git 历史与 upstream。
+克隆或进入 `SparseAttnUnified` 后先初始化 source submodule。`components/sgl-flash-attn`、`components/sglang`、`third_party/cutlass`、`experiments/legacy` 和 `baselines/minference` 各自保留独立 Git 历史与 upstream。
 
 ```bash
 cd /path/to/SparseAttnUnified

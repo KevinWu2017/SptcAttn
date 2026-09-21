@@ -1,5 +1,5 @@
-[submodule "components/flash-attn"]
-	path = components/flash-attn
+[submodule "components/sgl-flash-attn"]
+	path = components/sgl-flash-attn
 	url = https://github.com/KevinWu2017/sgl-flash-attn-sptc.git
 [submodule "components/sglang"]
 	path = components/sglang
