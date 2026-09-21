@@ -1,0 +1,29 @@
+# Rebuildable local state
+.build/
+.venv/
+**/.venv/
+**/build/
+**/build_dbg/
+**/dist/
+**/__pycache__/
+*.py[cod]
+*.so
+*.o
+*.a
+*.egg-info/
+.eggs/
+
+# Large locally downloaded binary dependencies are documented in docs/ENVIRONMENT.md.
+third_party/*.whl
+
+# Experiment outputs: preserve only curated reports in docs/ or reports/figures/
+results/
+reports/generated/
+*.nsys-rep
+*.ncu-rep
+*.sqlite
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store

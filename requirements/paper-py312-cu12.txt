@@ -1,0 +1,9 @@
+# SparseAttn paper-reproduction environment (CPython 3.12, CUDA 12).
+# Install the local FlashAttention wheel separately; see docs/ENVIRONMENT.md.
+sglang==0.4.8
+vllm==0.9.0
+tilelang==0.1.14
+accelerate==1.15.0
+# Fixed because vLLM 0.9.0 fails to import with Transformers 5.x due to
+# duplicate AIMv2 registration. This exact version is validated locally.
+transformers==4.52.3
