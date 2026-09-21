@@ -3,6 +3,9 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 python_bin="${PYTHON_BIN:-python3}"
+if [[ "${python_bin}" == */* && "${python_bin}" != /* ]]; then
+  python_bin="${repo_root}/${python_bin}"
+fi
 profile="${1:-quick}"
 if [[ $# -gt 0 ]]; then shift; fi
 
@@ -37,6 +40,6 @@ mkdir -p "${output_dir}"
 cd "${repo_root}/baselines/minference"
 exec "${python_bin}" experiments/benchmarks/profile_e2e_sweep.py \
   "${profile_args[@]}" \
-  --output-dir "${output_dir}" \
-  --run-name "${profile}" \
+  --output_dir "${output_dir}" \
+  --run_name "${profile}" \
   "$@"
