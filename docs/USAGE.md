@@ -31,4 +31,4 @@ metadata = convert_vertical_slash_indexes_sparse(
 output = sparse_attn_func_sptc(q, k, v, *metadata, block_size_M=64, block_size_N=64, causal=True)
 ```
 
-The supplied metadata determines the sparse attention support. Converting whole sliding-window blocks does not create an exact per-token sliding-window mask. In prior validation, the 32-token block path also produced incorrect weights for some sparse pairs. Until that path is corrected and checked against a reference, prefer block size 64 and verify output numerically for each new pattern. No benchmark or paper reproduction data is included here.
+The supplied metadata determines the sparse attention support. No benchmark or paper reproduction data is included here.

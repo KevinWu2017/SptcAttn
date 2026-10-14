@@ -46,4 +46,4 @@ output = sparse_attn_func_sptc(
 )
 ```
 
-For MInference, set `minference_prefill_backend="sptc"` (or pass `backend="sptc"` directly to `vertical_slash_sparse_attention`). The implementation is forward only. The input metadata defines which blocks/columns are attended; a sliding-window pattern must be constructed with the desired token-level mask semantics. Known numerical limitations are listed in [usage](docs/USAGE.md).
+For MInference, set `minference_prefill_backend="sptc"` (or pass `backend="sptc"` directly to `vertical_slash_sparse_attention`). The implementation is forward only. The input metadata defines which blocks and columns are attended.
