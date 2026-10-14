@@ -13,12 +13,12 @@
 *.egg-info/
 .eggs/
 
-# Large locally downloaded binary dependencies are documented in docs/ENVIRONMENT.md.
+# Locally downloaded binary dependencies
 third_party/*.whl
 
-# Experiment outputs: preserve only curated reports in docs/ or reports/figures/
+# Local build and profiling output
 results/
-reports/generated/
+reports/
 *.nsys-rep
 *.ncu-rep
 *.sqlite

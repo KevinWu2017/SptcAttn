@@ -22,4 +22,4 @@ fi
 "${bootstrap_python}" -m venv "${venv_dir}"
 echo "Created virtual environment: ${venv_dir}"
 echo "Next: source ${venv_dir}/bin/activate"
-echo "Then install a CUDA-compatible PyTorch wheel before running make install-* or make build."
+echo "Then install a CUDA-compatible PyTorch wheel before running make install-sgl-kernel."

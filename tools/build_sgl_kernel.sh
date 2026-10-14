@@ -31,7 +31,7 @@ print(torch.utils.cmake_prefix_path)
 PY
 )" || {
   echo "The selected Python needs both torch and scikit-build-core." >&2
-  echo "Install the paper dependencies, or run: ${python_bin} -m pip install scikit-build-core" >&2
+  echo "Install PyTorch and scikit-build-core in the selected environment." >&2
   exit 1
 }
 
@@ -95,4 +95,4 @@ if [[ -z "${wheel_path}" ]]; then
   exit 1
 fi
 "${python_bin}" -m pip install --force-reinstall --no-deps "${wheel_path}"
-"${python_bin}" -c 'import sgl_kernel, sgl_kernel.fa2_nosplit_ops; print("sgl-kernel: import OK")'
+"${python_bin}" -c 'import sgl_kernel.sparse_flash_attn as s; assert callable(s.sparse_attn_func_sptc); print("SPTC: import OK")'

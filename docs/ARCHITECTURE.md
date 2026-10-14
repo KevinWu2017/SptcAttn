@@ -1,22 +1,15 @@
 # Architecture
 
 ```text
-SGLang attention backend
-  -> sgl_kernel.sparse_flash_attn (Python contract)
-  -> sgl_kernel common extension (Torch operator registration)
-  -> flash-attn sparse C++ API and dispatcher
-  -> CUDA launch template
-  -> v1 baseline or v5 optimized forward kernel
-
-vertical/slash indexes
-  -> CUDA metadata conversion
-  -> block and sparse-block metadata consumed by the kernel
+vertical/slash indices
+  -> sgl_kernel.convert_vertical_slash_indexes_sparse
+  -> block and sparse-pair metadata
+  -> sgl_kernel.sparse_attn_func_sptc
+  -> torch.ops.sgl_kernel.fwd_sparse_sptc
+  -> flash::mha_fwd_sparse_sptc
+  -> CUDA SPTC forward kernel
 ```
 
-The public correctness comparison is **v1 -> v5**. v1 remains only as the reference implementation; v5 is the implementation being developed. V4 must not be added to new APIs, test names, result columns, or build targets.
+MInference's `vertical_slash_sparse_attention(..., backend="sptc")` creates the metadata and calls this Python interface. The SPTC computation uses CUDA structured sparsity instructions (`mma.sp`) in the sparse-pair path. The forked SGLang and FlashAttention repositories also retain upstream functionality required by their packages; the project-specific optimized sparse path is SPTC.
 
-`components/sgl-flash-attn` and `components/sglang` are first-party fork submodules. `third_party/cutlass` is an upstream dependency submodule. `baselines/minference` is a comparison-baseline submodule, not part of the production call chain.
-
-## Build boundary
-
-The isolated CMake entry is `experiments/legacy/cmake_sparse_compare`. It resolves all sources relative to this repository root and writes only into `.build/cmake`. Python wheels, profile reports, and benchmark tables must be produced under ignored `results/` paths.
+The operator is forward only. Its public inputs are Q/K/V tensors, six int32 metadata tensors, block sizes, and FlashAttention-style scale/mask options. The Python wrapper returns the output and optionally softmax LSE. `components/sgl-flash-attn` owns kernel arithmetic; `components/sglang/sgl-kernel` owns Torch registration and Python dispatch; `integrations/minference` owns the optional application adapter.

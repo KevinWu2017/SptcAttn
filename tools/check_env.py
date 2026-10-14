@@ -44,9 +44,9 @@ def main() -> int:
         capability = torch.cuda.get_device_capability(device)
         print(f"gpu:        {torch.cuda.get_device_name(device)} (sm_{capability[0]}{capability[1]})")
         if capability[0] < 8:
-            print("warning:    v5 mma.sp requires an Ampere-or-newer NVIDIA GPU (SM80+).")
+            print("warning:    SPTC currently accepts NVIDIA compute capability 8.x or 9.0.")
     else:
-        print("warning:    CUDA kernel builds and benchmarks cannot run until CUDA is available to PyTorch.")
+        print("warning:    SPTC cannot run until CUDA is available to PyTorch.")
 
     for module in ("sgl_kernel", "minference", "matplotlib", "triton"):
         print(f"{module:11}{module_state(module)}")
