@@ -1,9 +1,9 @@
 [submodule "components/sgl-flash-attn"]
 	path = components/sgl-flash-attn
-	url = https://github.com/KevinWu2017/sgl-flash-attn-sptc.git
+	url = https://github.com/guqiqi/sgl-flash-attn-sptc.git
 [submodule "components/sglang"]
 	path = components/sglang
-	url = https://github.com/KevinWu2017/sglang-sptc.git
+	url = https://github.com/guqiqi/sglang-sptc.git
 [submodule "third_party/cutlass"]
 	path = third_party/cutlass
 	url = https://github.com/NVIDIA/cutlass.git
